@@ -11,7 +11,7 @@ namespace DdosUsingGoogleSheets
 {
     public class Ddoser
     {
-        const int REQUESTS_INTERVAL = 400;
+        const int REQUESTS_INTERVAL = 500;
         static readonly string[] Scopes = { SheetsService.Scope.Spreadsheets };
         readonly string _applicationName;
         readonly SheetsService _service;
